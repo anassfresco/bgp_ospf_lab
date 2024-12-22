@@ -1,4 +1,5 @@
 # Network Architecture Overview
+https://github.com/anassfresco/bgp_ospf_lab/blob/main/pnet_lab.png
 
 This network topology demonstrates the integration of **BGP (Border Gateway Protocol)** and **OSPF (Open Shortest Path First)** routing protocols to achieve a robust and scalable inter-AS and intra-AS routing environment. The design integrates multiple Autonomous Systems (AS) to simulate inter-AS communication, while OSPF is used for internal routing within certain areas.
 
