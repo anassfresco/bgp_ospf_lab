@@ -1,0 +1,123 @@
+#show running-config 
+Building configuration...
+
+Current configuration : 1731 bytes
+!
+version 12.4
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname Router
+!
+boot-start-marker
+boot-end-marker
+!
+no logging console
+!
+no aaa new-model
+memory-size iomem 5
+!
+!
+ip cef
+!
+!
+!
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+interface Ethernet1/0
+ ip address 10.160.20.2 255.255.255.252
+ full-duplex
+!         
+interface Ethernet1/1
+ ip address 10.160.30.2 255.255.255.252
+ full-duplex
+!         
+interface Ethernet1/2
+ ip address 10.160.60.2 255.255.255.252
+ full-duplex
+!         
+interface Ethernet1/3
+ ip address 10.160.70.2 255.255.255.252
+ full-duplex
+!         
+interface Ethernet2/0
+ ip address 10.160.90.2 255.255.255.252
+ full-duplex
+!         
+interface Ethernet2/1
+ ip address 10.160.110.2 255.255.255.252
+ full-duplex
+!         
+interface Ethernet2/2
+ ip address 10.160.130.2 255.255.255.252
+ full-duplex
+!         
+interface Ethernet2/3
+ no ip address
+ shutdown 
+ full-duplex
+!         
+!         
+router bgp 65002
+ no synchronization
+ bgp log-neighbor-changes
+ network 10.160.20.0 mask 255.255.255.252
+ network 10.160.30.0 mask 255.255.255.252
+ network 10.160.60.0 mask 255.255.255.252
+ network 10.160.70.0 mask 255.255.255.252
+ network 10.160.90.0 mask 255.255.255.252
+ network 10.160.110.0 mask 255.255.255.252
+ network 10.160.130.0 mask 255.255.255.252
+ neighbor 10.160.20.1 remote-as 65003
+ neighbor 10.160.30.1 remote-as 65003
+ neighbor 10.160.60.1 remote-as 65004
+ neighbor 10.160.70.1 remote-as 65004
+ neighbor 10.160.90.1 remote-as 65005
+ neighbor 10.160.110.1 remote-as 65006
+ neighbor 10.160.130.1 remote-as 65007
+ no auto-summary
+!         
+ip http server
+ip forward-protocol nd
+!         
+!         
+!         
+!         
+route-map aspath permit 10
+ set as-path prepend 1 1 1 1 1 1
+!         
+!         
+!         
+control-plane
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+!         
+line con 0
+line aux 0
+line vty 0 4
+ login    
+!         
+!         
+end       
+          
