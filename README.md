@@ -1,27 +1,34 @@
 # Network Architecture Overview
-https://github.com/anassfresco/bgp_ospf_lab/blob/main/pnet_lab.png
 
 This network topology demonstrates the integration of **BGP (Border Gateway Protocol)** and **OSPF (Open Shortest Path First)** routing protocols to achieve a robust and scalable inter-AS and intra-AS routing environment. The design integrates multiple Autonomous Systems (AS) to simulate inter-AS communication, while OSPF is used for internal routing within certain areas.
+
+---
+
+![Network Topology](https://github.com/anassfresco/bgp_ospf_lab/blob/main/pnet_lab.png)
 
 ---
 
 ## Topology Highlights
 
 1. **Autonomous Systems (AS):**
+
    - Multiple ASes are deployed: **AS 65001, AS 65002, AS 65003, AS 65004, AS 65005, AS 65006, and AS 65007.**
    - BGP handles communication between these ASes, ensuring inter-AS routing with distinct path preferences.
 
 2. **OSPF Areas:**
+
    - **OSPF Area 0** (Backbone Area) serves as the core, providing connectivity between other areas.
    - **OSPF Area 1** and **OSPF Area 2** are defined for hierarchical routing and segmentation.
    - A virtual link is configured between Area 0 and Area 2 for improved connectivity.
 
 3. **Firewall Integration:**
+
    - Each AS incorporates **FortiGate firewalls** for security:
      - Example: **fw09** in AS 65003, **fw08** in AS 65004, **fw02** in AS 65005, etc.
    - These firewalls secure subnets such as `192.168.x.x/24` within their respective AS.
 
 4. **Routing Design:**
+
    - **BGP Configuration:**
      - eBGP is used between ASes to advertise and exchange routes.
      - iBGP within AS ensures internal consistency for route propagation.
@@ -30,10 +37,12 @@ This network topology demonstrates the integration of **BGP (Border Gateway Prot
      - Networks within the same AS use OSPF to share routes dynamically.
 
 5. **Switch and Router Configuration:**
-   - Each AS employs dedicated core routers and switches (e.g., **SW_DC_1/1**, **R1**, **R2**) to route traffic internally and between ASes.
+
+   - Each AS employs dedicated core routers and switches (e.g., **SW\_DC\_1/1**, **R1**, **R2**) to route traffic internally and between ASes.
    - IP addresses are assigned per subnet for clear segmentation and routing.
 
 6. **Redundancy and Scalability:**
+
    - Multiple paths are configured between ASes and within OSPF areas to ensure high availability.
    - Cross-links and dual connections enhance fault tolerance.
 
@@ -41,13 +50,13 @@ This network topology demonstrates the integration of **BGP (Border Gateway Prot
 
 ## Key Components and Their Functions
 
-| Component       | Description                                                                 |
-|------------------|-----------------------------------------------------------------------------|
-| **FortiGate**   | Provides security at AS boundaries, filters traffic, and enforces policies. |
-| **Core Routers** | Handle both BGP and OSPF configurations for routing traffic.               |
-| **Switches**     | Distribute traffic within data centers or ASes.                            |
-| **OSPF Areas**   | Enable hierarchical routing and reduce routing overhead.                   |
-| **BGP**          | Manages inter-AS routing for scalability and external connectivity.        |
+| Component        | Description                                                                 |
+| ---------------- | --------------------------------------------------------------------------- |
+| **FortiGate**    | Provides security at AS boundaries, filters traffic, and enforces policies. |
+| **Core Routers** | Handle both BGP and OSPF configurations for routing traffic.                |
+| **Switches**     | Distribute traffic within data centers or ASes.                             |
+| **OSPF Areas**   | Enable hierarchical routing and reduce routing overhead.                    |
+| **BGP**          | Manages inter-AS routing for scalability and external connectivity.         |
 
 ---
 
@@ -60,6 +69,7 @@ This network topology demonstrates the integration of **BGP (Border Gateway Prot
 ## Sample Configuration Details
 
 ### **BGP Configuration Example (AS 65001):**
+
 ```bash
 router bgp 65001
   neighbor 10.160.0.2 remote-as 65002
@@ -67,6 +77,7 @@ router bgp 65001
 ```
 
 ### **OSPF Configuration Example (Area 0):**
+
 ```bash
 router ospf
   network 192.168.1.0 0.0.0.255 area 0
@@ -78,9 +89,10 @@ router ospf
 ## Diagram Explanation
 
 The architecture is visualized with clear divisions:
+
 - **AS Boundaries:** Marked by firewalls and connected using BGP.
 - **Internal Routing:** Achieved with OSPF across designated areas.
-- **Data Centers:** Switches (e.g., SW_DC_1/1, SW_DC_2/2) ensure internal traffic distribution.
+- **Data Centers:** Switches (e.g., SW\_DC\_1/1, SW\_DC\_2/2) ensure internal traffic distribution.
 - **Subnets:** Each AS is subdivided into distinct subnets for better organization.
 
 ---
